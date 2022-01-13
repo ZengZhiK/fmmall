@@ -4,6 +4,7 @@ package com.zzk.fmmall.api;
 import cn.hutool.json.JSONUtil;
 import com.zzk.fmmall.ajax.AjaxResult;
 import com.zzk.fmmall.annotation.LogPrint;
+import com.zzk.fmmall.service.CategoryService;
 import com.zzk.fmmall.service.IndexImgService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -30,10 +31,19 @@ public class IndexController {
     @Autowired
     private IndexImgService indexImgService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @LogPrint(description = "轮播图查询接口")
     @GetMapping("/carousels")
     public AjaxResult listCarousels() {
         return indexImgService.listCarousels();
+    }
+
+    @LogPrint(description = "分类列表查询接口")
+    @GetMapping("/categories")
+    public AjaxResult listCategories() {
+        return categoryService.listCategories();
     }
 }
 

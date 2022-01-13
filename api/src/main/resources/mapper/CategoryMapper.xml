@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzk.fmmall.dao.CategoryDAO">
+    <resultMap id="categoryVoMap" type="com.zzk.fmmall.vo.resp.CategoryVo">
+        <id column="category_id1" jdbcType="INTEGER" property="categoryId"/>
+        <result column="category_name1" jdbcType="VARCHAR" property="categoryName"/>
+        <result column="category_level1" jdbcType="INTEGER" property="categoryLevel"/>
+        <result column="parent_id1" jdbcType="INTEGER" property="parentId"/>
+        <result column="category_icon1" jdbcType="VARCHAR" property="categoryIcon"/>
+        <result column="category_slogan1" jdbcType="VARCHAR" property="categorySlogan"/>
+        <result column="category_pic1" jdbcType="VARCHAR" property="categoryPic"/>
+        <result column="category_bg_color1" jdbcType="VARCHAR" property="categoryBgColor"/>
+        <collection property="categories" ofType="com.zzk.fmmall.vo.resp.CategoryVo">
+            <id column="category_id2" jdbcType="INTEGER" property="categoryId"/>
+            <result column="category_name2" jdbcType="VARCHAR" property="categoryName"/>
+            <result column="category_level2" jdbcType="INTEGER" property="categoryLevel"/>
+            <result column="parent_id2" jdbcType="INTEGER" property="parentId"/>
+            <collection property="categories" ofType="com.zzk.fmmall.vo.resp.CategoryVo">
+                <id column="category_id3" jdbcType="INTEGER" property="categoryId"/>
+                <result column="category_name3" jdbcType="VARCHAR" property="categoryName"/>
+                <result column="category_level3" jdbcType="INTEGER" property="categoryLevel"/>
+                <result column="parent_id3" jdbcType="INTEGER" property="parentId"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="selectAllCategories" resultMap="categoryVoMap">
+        SELECT
+            c1.category_id       'category_id1',
+            c1.category_name     'category_name1',
+            c1.category_level    'category_level1',
+            c1.parent_id         'parent_id1',
+            c1.category_icon     'category_icon1',
+            c1.category_slogan   'category_slogan1',
+            c1.category_pic      'category_pic1',
+            c1.category_bg_color 'category_bg_color1',
+            c2.category_id       'category_id2',
+            c2.category_name     'category_name2',
+            c2.category_level    'category_level2',
+            c2.parent_id         'parent_id2',
+            c3.category_id       'category_id3',
+            c3.category_name     'category_name3',
+            c3.category_level    'category_level3',
+            c3.parent_id         'parent_id3'
+        FROM
+            category c1
+        INNER JOIN
+            category c2
+        ON
+            c2.parent_id = c1.category_id
+        LEFT JOIN
+            category c3
+        ON
+            c3.parent_id = c2.category_id
+        WHERE
+            c1.category_level = 1
+    </select>
+</mapper>
