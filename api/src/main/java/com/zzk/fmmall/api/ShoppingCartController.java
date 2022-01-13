@@ -21,8 +21,8 @@ import java.util.HashMap;
  */
 @Slf4j
 @Api(tags = "购物车管理")
-@RestController
 @CrossOrigin
+@RestController
 @RequestMapping("/shopcart")
 public class ShoppingCartController {
     @LogPrint(description = "购物车展示接口")

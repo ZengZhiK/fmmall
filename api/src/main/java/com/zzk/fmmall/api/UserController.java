@@ -25,8 +25,8 @@ import javax.validation.Valid;
  * @since 2021-12-22
  */
 @Api(tags = "用户管理")
-@RestController
 @CrossOrigin
+@RestController
 @RequestMapping("/user")
 public class UserController {
     @Autowired
