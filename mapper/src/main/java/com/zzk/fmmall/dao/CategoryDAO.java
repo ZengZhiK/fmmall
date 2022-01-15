@@ -2,6 +2,7 @@ package com.zzk.fmmall.dao;
 
 import com.zzk.fmmall.entity.Category;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zzk.fmmall.vo.resp.CategoryProductVo;
 import com.zzk.fmmall.vo.resp.CategoryVo;
 
 import java.util.List;
@@ -22,4 +23,11 @@ public interface CategoryDAO extends BaseMapper<Category> {
      * @return
      */
     List<CategoryVo> selectAllCategories();
+
+    /**
+     * 根据1级分类查询6个推荐商品
+     *
+     * @return
+     */
+    List<CategoryProductVo> selectRecommendProductsByFirstLevelCategories();
 }

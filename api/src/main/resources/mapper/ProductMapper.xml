@@ -30,4 +30,23 @@
         ORDER BY create_time DESC
         LIMIT 0,3
     </select>
+
+    <select id="selectTop6ByRootCategoryId" resultMap="ProductVOMap">
+        SELECT
+            product_id,
+            product_name,
+            category_id,
+            root_category_id,
+            sold_num,
+            product_status,
+            content,
+            create_time,
+            update_time
+        FROM
+            product
+        WHERE
+            root_category_id = #{cid}
+        ORDER BY sold_num DESC
+        LIMIT 0,6
+    </select>
 </mapper>

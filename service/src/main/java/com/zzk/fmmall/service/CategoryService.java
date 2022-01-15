@@ -19,4 +19,11 @@ public interface CategoryService extends IService<Category> {
      * @return
      */
     AjaxResult listCategories();
+
+    /**
+     * 根据1级分类查询6个推荐商品
+     *
+     * @return
+     */
+    AjaxResult listRecommendProductsByFirstLevelCategories();
 }

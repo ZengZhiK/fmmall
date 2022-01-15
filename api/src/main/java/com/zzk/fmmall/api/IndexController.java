@@ -59,5 +59,12 @@ public class IndexController {
     public AjaxResult listRecommendProducts() {
         return productService.listRecommendProducts();
     }
+
+    @LogPrint(description = "按类商品推荐查询接口")
+    @ApiOperation("按类商品推荐查询接口")
+    @GetMapping("/recommend-products-by-categories")
+    public AjaxResult listRecommendProductsByCategories() {
+        return categoryService.listRecommendProductsByFirstLevelCategories();
+    }
 }
 
