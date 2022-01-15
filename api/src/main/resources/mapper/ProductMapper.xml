@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzk.fmmall.dao.ProductDAO">
+    <resultMap id="ProductVOMap" type="com.zzk.fmmall.vo.resp.ProductVo">
+        <id column="product_id" jdbcType="VARCHAR" property="productId"/>
+        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
+        <result column="root_category_id" jdbcType="INTEGER" property="rootCategoryId"/>
+        <result column="sold_num" jdbcType="INTEGER" property="soldNum"/>
+        <result column="product_status" jdbcType="INTEGER" property="productStatus"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+        <collection property="imgs" select="com.zzk.fmmall.dao.ProductImgDAO.selectByItemId" column="product_id"/>
+    </resultMap>
+
+    <select id="selectRecommendProducts" resultMap="ProductVOMap">
+        SELECT
+            product_id,
+            product_name,
+            category_id,
+            root_category_id,
+            sold_num,
+            product_status,
+            content,
+            create_time,
+            update_time
+        FROM
+            product
+        ORDER BY create_time DESC
+        LIMIT 0,3
+    </select>
+</mapper>
