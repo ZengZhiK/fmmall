@@ -25,8 +25,8 @@ public interface ProductDAO extends BaseMapper<Product> {
     /**
      * 查询指定一级类别下销量最高的6个商品
      *
-     * @param categoryId
+     * @param rootCategoryId
      * @return
      */
-    List<ProductVo> selectTop6ByRootCategoryId(int categoryId);
+    List<ProductVo> selectTop6ByRootCategoryId(int rootCategoryId);
 }
