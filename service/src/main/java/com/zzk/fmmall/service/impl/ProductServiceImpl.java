@@ -7,9 +7,11 @@ import com.zzk.fmmall.ajax.AjaxResult;
 import com.zzk.fmmall.constant.HttpStatus;
 import com.zzk.fmmall.dao.ProductDAO;
 import com.zzk.fmmall.dao.ProductImgDAO;
+import com.zzk.fmmall.dao.ProductParamsDAO;
 import com.zzk.fmmall.dao.ProductSkuDAO;
 import com.zzk.fmmall.entity.Product;
 import com.zzk.fmmall.entity.ProductImg;
+import com.zzk.fmmall.entity.ProductParams;
 import com.zzk.fmmall.entity.ProductSku;
 import com.zzk.fmmall.service.ProductService;
 import com.zzk.fmmall.vo.resp.ProductVo;
@@ -37,6 +39,9 @@ public class ProductServiceImpl extends ServiceImpl<ProductDAO, Product> impleme
 
     @Autowired
     private ProductSkuDAO productSkuDAO;
+
+    @Autowired
+    private ProductParamsDAO productParamsDAO;
 
     @Override
     public AjaxResult listRecommendProducts() {
@@ -70,6 +75,18 @@ public class ProductServiceImpl extends ServiceImpl<ProductDAO, Product> impleme
             return AjaxResult.success(basicInfo);
         } else {
             return AjaxResult.error(HttpStatus.BAD_REQUEST, "查询的商品不存在！");
+        }
+    }
+
+    @Override
+    public AjaxResult getProductParamsInfo(String productId) {
+        QueryWrapper<ProductParams> wrapper = new QueryWrapper<>();
+        wrapper.eq("product_id", productId);
+        ProductParams productParams = productParamsDAO.selectOne(wrapper);
+        if (ObjectUtil.isNotNull(productParams)) {
+            return AjaxResult.success(productParams);
+        } else {
+            return AjaxResult.error(HttpStatus.BAD_REQUEST, "查询的商品参数不存在！");
         }
     }
 }

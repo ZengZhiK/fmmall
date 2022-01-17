@@ -33,5 +33,13 @@ public class ProductController {
     public AjaxResult listRecommendProducts(@PathVariable String productId) {
         return productService.getProductBasicInfo(productId);
     }
+
+    @LogPrint(description = "商品参数信息查询接口")
+    @ApiOperation("商品参数信息查询接口")
+    @ApiImplicitParam(name = "productId", value = "商品Id", required = true, paramType = "path")
+    @GetMapping("/detail-params/{productId}")
+    public AjaxResult getProductParams(@PathVariable String productId){
+        return productService.getProductParamsInfo(productId);
+    }
 }
 
