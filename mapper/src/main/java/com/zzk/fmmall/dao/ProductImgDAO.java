@@ -14,5 +14,11 @@ import java.util.List;
  * @since 2022-01-15
  */
 public interface ProductImgDAO extends BaseMapper<ProductImg> {
-    List<ProductImg> selectByItemId(int itemId);
+    /**
+     * 根据商品Id查询对应的图片
+     *
+     * @param itemId
+     * @return
+     */
+    List<ProductImg> selectByItemId(String itemId);
 }
