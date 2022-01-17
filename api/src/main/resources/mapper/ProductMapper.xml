@@ -11,7 +11,7 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
-        <collection property="imgs" select="com.zzk.fmmall.dao.ProductImgDAO.selectByItemId" column="product_id"/>
+        <collection property="imgs" select="com.zzk.fmmall.dao.ProductImgDAO.selectByProductId" column="product_id"/>
     </resultMap>
 
     <select id="selectRecommendProducts" resultMap="ProductVOMap">

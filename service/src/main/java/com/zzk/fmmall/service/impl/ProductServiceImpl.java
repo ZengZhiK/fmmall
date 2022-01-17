@@ -56,7 +56,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductDAO, Product> impleme
         Product product = productDAO.selectOne(productWrapper);
 
         if (ObjectUtil.isNotNull(product)) {
-            List<ProductImg> productImgs = productImgDAO.selectByItemId(product.getProductId());
+            List<ProductImg> productImgs = productImgDAO.selectByProductId(product.getProductId());
 
             QueryWrapper<ProductSku> skuWrapper = new QueryWrapper<>();
             skuWrapper.eq("product_id", productId);

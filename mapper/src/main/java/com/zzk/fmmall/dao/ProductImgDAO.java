@@ -17,8 +17,8 @@ public interface ProductImgDAO extends BaseMapper<ProductImg> {
     /**
      * 根据商品Id查询对应的图片
      *
-     * @param itemId
+     * @param productId
      * @return
      */
-    List<ProductImg> selectByItemId(String itemId);
+    List<ProductImg> selectByProductId(String productId);
 }

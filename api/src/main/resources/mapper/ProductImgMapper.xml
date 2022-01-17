@@ -12,7 +12,7 @@
         <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
     </resultMap>
 
-    <select id="selectByItemId" resultMap="BaseResultMap">
+    <select id="selectByProductId" resultMap="BaseResultMap">
         SELECT
             id,
             item_id,
@@ -24,6 +24,6 @@
         FROM
             product_img
         WHERE
-            item_id=#{itemId}
+            item_id=#{productId}
     </select>
 </mapper>
