@@ -19,4 +19,12 @@ public interface ProductService extends IService<Product> {
      * @return
      */
     AjaxResult listRecommendProducts();
+
+    /**
+     * 查询商品基本信息
+     *
+     * @param productId
+     * @return
+     */
+    AjaxResult getProductBasicInfo(String productId);
 }
