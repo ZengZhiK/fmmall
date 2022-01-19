@@ -58,5 +58,13 @@ public class ProductController {
     public AjaxResult getProductComments(@PathVariable String productId, @RequestParam("pageNum") int pageNum, @RequestParam("limit") int limit) {
         return productCommentService.listCommentsByProductId(productId, pageNum, limit);
     }
+
+    @LogPrint(description = "商品评论统计信息查询接口")
+    @ApiOperation("商品评论统计信息查询接口")
+    @ApiImplicitParam(name = "productId", value = "商品Id", required = true, dataType = "String", paramType = "path")
+    @GetMapping("/detail-comments-count/{productId}")
+    public AjaxResult getProductCommentsCount(@PathVariable String productId) {
+        return productCommentService.getCommentsCountByProductId(productId);
+    }
 }
 

@@ -13,6 +13,9 @@ import com.zzk.fmmall.vo.resp.ProductCommentVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
+
 /**
  * <p>
  * 商品评价  服务实现类
@@ -36,5 +39,37 @@ public class ProductCommentServiceImpl extends ServiceImpl<ProductCommentDAO, Pr
         } else {
             return AjaxResult.error("查询商品评价失败！");
         }
+    }
+
+    @Override
+    public AjaxResult getCommentsCountByProductId(String productId) {
+        QueryWrapper<ProductComment> countWrapper = new QueryWrapper<>();
+        countWrapper.eq("product_id", productId);
+        Integer total = productCommentDAO.selectCount(countWrapper);
+
+        QueryWrapper<ProductComment> goodWrapper = new QueryWrapper<>();
+        goodWrapper.eq("product_id", productId);
+        goodWrapper.eq("comm_type", 1);
+        Integer goodTotal = productCommentDAO.selectCount(goodWrapper);
+
+        QueryWrapper<ProductComment> midWrapper = new QueryWrapper<>();
+        midWrapper.eq("product_id", productId);
+        midWrapper.eq("comm_type", 0);
+        Integer midTotal = productCommentDAO.selectCount(midWrapper);
+
+        QueryWrapper<ProductComment> badWrapper = new QueryWrapper<>();
+        badWrapper.eq("product_id", productId);
+        badWrapper.eq("comm_type", -1);
+        Integer badTotal = productCommentDAO.selectCount(badWrapper);
+
+        BigDecimal percent = BigDecimal.valueOf((goodTotal.doubleValue() / total.doubleValue()) * 100);
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("total", total);
+        map.put("goodTotal", goodTotal);
+        map.put("midTotal", midTotal);
+        map.put("badTotal", badTotal);
+        map.put("percent", percent.setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+        return AjaxResult.success(map);
     }
 }

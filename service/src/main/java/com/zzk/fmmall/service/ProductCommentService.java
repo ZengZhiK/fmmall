@@ -22,4 +22,12 @@ public interface ProductCommentService extends IService<ProductComment> {
      * @return
      */
     AjaxResult listCommentsByProductId(String productId, int pageNum, int limit);
+
+    /**
+     * 查询商品评论统计信息
+     *
+     * @param productId
+     * @return
+     */
+    AjaxResult getCommentsCountByProductId(String productId);
 }
