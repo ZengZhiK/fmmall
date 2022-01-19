@@ -28,8 +28,11 @@
         <mysql.version>5.1.47</mysql.version>
         <druid.version>1.1.22</druid.version>
         <mybatis-plus.version>3.1.0</mybatis-plus.version>
+        <jsqlparser.version>4.0</jsqlparser.version>
         <velocity.version>2.0</velocity.version>
         <lombok.version>1.16.18</lombok.version>
+        <swagger2.version>2.9.2</swagger2.version>
+        <swagger-bootstrap-ui.version>1.9.6</swagger-bootstrap-ui.version>
         <log4j.version>1.2.17</log4j.version>
         <hibernate.validator.version>6.1.5.Final</hibernate.validator.version>
         <hutool.version>5.5.8</hutool.version>
@@ -92,12 +95,11 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-generator</artifactId>
                 <version>${mybatis-plus.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>jsqlparser</artifactId>
-                        <groupId>com.github.jsqlparser</groupId>
-                    </exclusion>
-                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.github.jsqlparser</groupId>
+                <artifactId>jsqlparser</artifactId>
+                <version>${jsqlparser.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.velocity</groupId>
@@ -114,17 +116,17 @@
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
-                <version>2.9.2</version>
+                <version>${swagger2.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
-                <version>2.9.2</version>
+                <version>${swagger2.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>swagger-bootstrap-ui</artifactId>
-                <version>1.9.6</version>
+                <version>${swagger-bootstrap-ui.version}</version>
             </dependency>
             <!-- hibernate validator -->
             <dependency>
