@@ -1,6 +1,7 @@
 package com.zzk.fmmall.api;
 
 
+import cn.hutool.json.JSONUtil;
 import com.zzk.fmmall.ajax.AjaxResult;
 import com.zzk.fmmall.annotation.LogPrint;
 import com.zzk.fmmall.service.ProductCommentService;
@@ -9,8 +10,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 /**
  * <p>
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
  * @author zzk
  * @since 2022-01-15
  */
+@Slf4j
 @Api(tags = "商品管理")
 @CrossOrigin
 @RestController
@@ -36,6 +41,10 @@ public class ProductController {
     @ApiImplicitParam(name = "productId", value = "商品Id", required = true, paramType = "path")
     @GetMapping("/basic-info/{productId}")
     public AjaxResult listRecommendProducts(@PathVariable String productId) {
+        log.info("Request Args   : {}", JSONUtil.toJsonStr(
+                new HashMap<String, Object>() {{
+                    put("productId", productId);
+                }}));
         return productService.getProductBasicInfo(productId);
     }
 
@@ -44,6 +53,10 @@ public class ProductController {
     @ApiImplicitParam(name = "productId", value = "商品Id", required = true, dataType = "String", paramType = "path")
     @GetMapping("/detail-params/{productId}")
     public AjaxResult getProductParams(@PathVariable String productId) {
+        log.info("Request Args   : {}", JSONUtil.toJsonStr(
+                new HashMap<String, Object>() {{
+                    put("productId", productId);
+                }}));
         return productService.getProductParamsInfo(productId);
     }
 
@@ -56,6 +69,12 @@ public class ProductController {
     })
     @GetMapping("/detail-comments/{productId}")
     public AjaxResult getProductComments(@PathVariable String productId, @RequestParam("pageNum") int pageNum, @RequestParam("limit") int limit) {
+        log.info("Request Args   : {}", JSONUtil.toJsonStr(
+                new HashMap<String, Object>() {{
+                    put("productId", productId);
+                    put("pageNum", pageNum);
+                    put("limit", limit);
+                }}));
         return productCommentService.listCommentsByProductId(productId, pageNum, limit);
     }
 
@@ -64,6 +83,10 @@ public class ProductController {
     @ApiImplicitParam(name = "productId", value = "商品Id", required = true, dataType = "String", paramType = "path")
     @GetMapping("/detail-comments-count/{productId}")
     public AjaxResult getProductCommentsCount(@PathVariable String productId) {
+        log.info("Request Args   : {}", JSONUtil.toJsonStr(
+                new HashMap<String, Object>() {{
+                    put("productId", productId);
+                }}));
         return productCommentService.getCommentsCountByProductId(productId);
     }
 }
