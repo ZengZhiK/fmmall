@@ -4,9 +4,13 @@ package com.zzk.fmmall.api;
 import cn.hutool.json.JSONUtil;
 import com.zzk.fmmall.ajax.AjaxResult;
 import com.zzk.fmmall.annotation.LogPrint;
+import com.zzk.fmmall.service.ShoppingCartService;
+import com.zzk.fmmall.vo.req.ShoppingCartVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -25,6 +29,16 @@ import java.util.HashMap;
 @RestController
 @RequestMapping("/shopcart")
 public class ShoppingCartController {
+    @Autowired
+    private ShoppingCartService shoppingCartService;
+
+    @LogPrint(description = "添加购物车接口")
+    @ApiOperation("添加购物车接口")
+    @PostMapping("/add")
+    public AjaxResult addShoppingCart(@RequestBody ShoppingCartVo shoppingCartVo) {
+        return shoppingCartService.addShoppingCart(shoppingCartVo);
+    }
+
     @LogPrint(description = "购物车展示接口")
     @GetMapping("/list")
     @ApiImplicitParam(name = "userId", value = "用户ID", required = true)

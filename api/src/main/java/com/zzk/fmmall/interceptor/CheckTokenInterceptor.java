@@ -49,7 +49,14 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
         // 打印token
         log.info("TOKEN          : {}", token);
 
-        if (!JwtTokenUtils.validateToken(token, jwtTokenConfig.getSecretKey())) {
+        try {
+            if (!JwtTokenUtils.validateToken(token, jwtTokenConfig.getSecretKey())) {
+                doResponse(response, AjaxResult.error(HttpStatus.UNAUTHORIZED, "令牌不合法！"));
+                log.info("令牌校验失败！");
+                log.info("=========================================== End ===========================================" + LINE_SEPARATOR);
+                return false;
+            }
+        } catch (Exception e) {
             doResponse(response, AjaxResult.error(HttpStatus.UNAUTHORIZED, "令牌不合法！"));
             log.info("令牌校验失败！");
             log.info("=========================================== End ===========================================" + LINE_SEPARATOR);
