@@ -1,6 +1,7 @@
 package com.zzk.fmmall.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zzk.fmmall.ajax.AjaxResult;
 import com.zzk.fmmall.dao.ShoppingCartDAO;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,6 +50,22 @@ public class ShoppingCartServiceImpl extends ServiceImpl<ShoppingCartDAO, Shoppi
         List<com.zzk.fmmall.vo.resp.ShoppingCartVo> shoppingCartVos = shoppingCartDAO.selectShopcartByUserId(userId);
         if (ObjectUtil.isEmpty(shoppingCartVos)) {
             return AjaxResult.error("购物车查询失败！");
+        } else {
+            return AjaxResult.success(shoppingCartVos);
+        }
+    }
+
+    @Override
+    public AjaxResult listShoppingCartsByCids(String cids) {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (String cid : cids.split(",")) {
+            list.add(Integer.parseInt(cid));
+        }
+
+        List<com.zzk.fmmall.vo.resp.ShoppingCartVo> shoppingCartVos = shoppingCartDAO.selectShopcartByCids(list);
+
+        if (ObjectUtil.isEmpty(shoppingCartVos)) {
+            return AjaxResult.error("提交购物车失败！");
         } else {
             return AjaxResult.success(shoppingCartVos);
         }

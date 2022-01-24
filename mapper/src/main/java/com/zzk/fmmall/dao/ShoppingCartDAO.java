@@ -3,7 +3,9 @@ package com.zzk.fmmall.dao;
 import com.zzk.fmmall.entity.ShoppingCart;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zzk.fmmall.vo.resp.ShoppingCartVo;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,4 +25,12 @@ public interface ShoppingCartDAO extends BaseMapper<ShoppingCart> {
      * @return
      */
     List<ShoppingCartVo> selectShopcartByUserId(Integer userId);
+
+    /**
+     * 查询提交的购物车
+     *
+     * @param cids
+     * @return
+     */
+    List<ShoppingCartVo> selectShopcartByCids(@Param("cids") ArrayList<Integer> cids);
 }

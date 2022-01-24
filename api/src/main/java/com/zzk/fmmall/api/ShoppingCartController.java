@@ -50,5 +50,13 @@ public class ShoppingCartController {
                 }}));
         return shoppingCartService.listShoppingCartsByUserId(userId);
     }
+
+    @LogPrint(description = "购物车提交查询接口")
+    @ApiOperation("购物车提交查询接口")
+    @ApiImplicitParam(dataType = "String", name = "cids", value = "选择的购物车记录的id", required = true)
+    @GetMapping("/listbycids")
+    public AjaxResult listByCids(String cids) {
+        return shoppingCartService.listShoppingCartsByCids(cids);
+    }
 }
 
