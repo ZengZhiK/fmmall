@@ -40,8 +40,9 @@ public class ShoppingCartController {
     }
 
     @LogPrint(description = "购物车展示接口")
-    @GetMapping("/list")
+    @ApiOperation("购物车展示接口")
     @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "Integer")
+    @GetMapping("/list")
     public AjaxResult list(@RequestParam("userId") Integer userId) {
         log.info("Request Args   : {}", JSONUtil.toJsonStr(
                 new HashMap<String, Integer>() {{
