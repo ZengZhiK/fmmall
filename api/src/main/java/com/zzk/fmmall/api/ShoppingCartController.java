@@ -41,13 +41,13 @@ public class ShoppingCartController {
 
     @LogPrint(description = "购物车展示接口")
     @GetMapping("/list")
-    @ApiImplicitParam(name = "userId", value = "用户ID", required = true)
+    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "Integer")
     public AjaxResult list(@RequestParam("userId") Integer userId) {
         log.info("Request Args   : {}", JSONUtil.toJsonStr(
                 new HashMap<String, Integer>() {{
                     put("userId", userId);
                 }}));
-        return AjaxResult.success();
+        return shoppingCartService.listShoppingCartsByUserId(userId);
     }
 }
 

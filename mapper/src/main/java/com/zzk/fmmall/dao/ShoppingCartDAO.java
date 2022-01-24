@@ -2,6 +2,9 @@ package com.zzk.fmmall.dao;
 
 import com.zzk.fmmall.entity.ShoppingCart;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zzk.fmmall.vo.resp.ShoppingCartVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface ShoppingCartDAO extends BaseMapper<ShoppingCart> {
 
+    /**
+     * 根据用户Id查询购物车
+     *
+     * @param userId
+     * @return
+     */
+    List<ShoppingCartVo> selectShopcartByUserId(Integer userId);
 }

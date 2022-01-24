@@ -21,4 +21,12 @@ public interface ShoppingCartService extends IService<ShoppingCart> {
      * @return
      */
     AjaxResult addShoppingCart(ShoppingCartVo shoppingCartVo);
+
+    /**
+     * 根据用户Id查询购物车
+     *
+     * @param userId
+     * @return
+     */
+    AjaxResult listShoppingCartsByUserId(Integer userId);
 }

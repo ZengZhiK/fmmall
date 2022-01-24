@@ -1,5 +1,6 @@
 package com.zzk.fmmall.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zzk.fmmall.ajax.AjaxResult;
 import com.zzk.fmmall.dao.ShoppingCartDAO;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * <p>
@@ -38,6 +40,16 @@ public class ShoppingCartServiceImpl extends ServiceImpl<ShoppingCartDAO, Shoppi
             return AjaxResult.success("添加购物车成功！");
         } else {
             return AjaxResult.error("添加购物车失败！");
+        }
+    }
+
+    @Override
+    public AjaxResult listShoppingCartsByUserId(Integer userId) {
+        List<com.zzk.fmmall.vo.resp.ShoppingCartVo> shoppingCartVos = shoppingCartDAO.selectShopcartByUserId(userId);
+        if (ObjectUtil.isEmpty(shoppingCartVos)) {
+            return AjaxResult.error("购物车查询失败！");
+        } else {
+            return AjaxResult.success(shoppingCartVos);
         }
     }
 }
