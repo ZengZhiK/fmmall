@@ -1,11 +1,10 @@
 package com.zzk.fmmall.dao;
 
-import com.zzk.fmmall.entity.ShoppingCart;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zzk.fmmall.entity.ShoppingCart;
 import com.zzk.fmmall.vo.resp.ShoppingCartVo;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,5 +31,5 @@ public interface ShoppingCartDAO extends BaseMapper<ShoppingCart> {
      * @param cids
      * @return
      */
-    List<ShoppingCartVo> selectShopcartByCids(@Param("cids") ArrayList<Integer> cids);
+    List<ShoppingCartVo> selectShopcartByCids(@Param("cids") List<Integer> cids);
 }
