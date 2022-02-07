@@ -37,4 +37,13 @@ public interface ShoppingCartService extends IService<ShoppingCart> {
      * @return
      */
     AjaxResult listShoppingCartsByCids(String cids);
+
+    /**
+     * 修改购物车数量
+     *
+     * @param cartId
+     * @param cartNum
+     * @return
+     */
+    AjaxResult updateCartNum(Integer cartId, Integer cartNum);
 }

@@ -8,6 +8,7 @@ import com.zzk.fmmall.service.ShoppingCartService;
 import com.zzk.fmmall.vo.req.ShoppingCartVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class ShoppingCartController {
 
     @LogPrint(description = "购物车展示接口")
     @ApiOperation("购物车展示接口")
-    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "Integer")
+    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int")
     @GetMapping("/list")
     public AjaxResult list(@RequestParam("userId") Integer userId) {
         log.info("Request Args   : {}", JSONUtil.toJsonStr(
@@ -57,6 +58,17 @@ public class ShoppingCartController {
     @GetMapping("/listbycids")
     public AjaxResult listByCids(String cids) {
         return shoppingCartService.listShoppingCartsByCids(cids);
+    }
+
+    @LogPrint(description = "购物车数量修改接口")
+    @ApiOperation("购物车数量修改接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(dataType = "String", name = "cids", value = "选择的购物车记录的id", required = true),
+            @ApiImplicitParam(dataType = "String", name = "cnum", value = "数量", required = true)
+    })
+    @PutMapping("/update/{cid}/{cnum}")
+    public AjaxResult updateNum(@PathVariable("cid") Integer cartId, @PathVariable("cnum") Integer cartNum) {
+        return shoppingCartService.updateCartNum(cartId, cartNum);
     }
 }
 

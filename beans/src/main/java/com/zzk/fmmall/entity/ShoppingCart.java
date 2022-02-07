@@ -47,7 +47,7 @@ public class ShoppingCart implements Serializable {
     /**
      * 购物车商品数量
      */
-    private String cartNum;
+    private Integer cartNum;
 
     /**
      * 添加购物车时间

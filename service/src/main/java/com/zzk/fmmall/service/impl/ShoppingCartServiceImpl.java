@@ -1,7 +1,6 @@
 package com.zzk.fmmall.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zzk.fmmall.ajax.AjaxResult;
 import com.zzk.fmmall.dao.ShoppingCartDAO;
@@ -68,6 +67,19 @@ public class ShoppingCartServiceImpl extends ServiceImpl<ShoppingCartDAO, Shoppi
             return AjaxResult.error("提交购物车失败！");
         } else {
             return AjaxResult.success(shoppingCartVos);
+        }
+    }
+
+    @Override
+    public AjaxResult updateCartNum(Integer cartId, Integer cartNum) {
+        synchronized (ShoppingCartServiceImpl.class) {
+            ShoppingCart shoppingCart = new ShoppingCart();
+            shoppingCart.setCartId(cartId).setCartNum(cartNum);
+            if (shoppingCartDAO.updateById(shoppingCart) > 0) {
+                return AjaxResult.success();
+            } else {
+                return AjaxResult.error("购物车数量修改失败！");
+            }
         }
     }
 }
