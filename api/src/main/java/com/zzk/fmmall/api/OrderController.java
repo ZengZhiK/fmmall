@@ -7,6 +7,7 @@ import com.zzk.fmmall.annotation.LogPrint;
 import com.zzk.fmmall.config.AppPayConfig;
 import com.zzk.fmmall.entity.Order;
 import com.zzk.fmmall.service.OrderService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ import java.util.Map;
  * @author zzk
  * @since 2022-02-07
  */
+@Api(tags = "订单管理")
 @CrossOrigin
 @RestController
 @RequestMapping("/order")
